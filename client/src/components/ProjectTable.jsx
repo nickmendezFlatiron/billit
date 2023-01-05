@@ -12,11 +12,13 @@ const ProjectTable = () => {
       <Row>
         <Col>
           <h5>Hours Tracked</h5>
-          <h3>xxx.00</h3>
+          <h2>xxx.00</h2>
         </Col>
         <Col className="text-end">
-          <h5>Billable Amount</h5>
-          <h3>$xx,xxx.00</h3>
+          <Col className='border w-auto'>
+            <h5 className=''>Billable Amount</h5>
+            <h2>$xx,xxx.00</h2>
+          </Col>
         </Col>
       </Row>
   
