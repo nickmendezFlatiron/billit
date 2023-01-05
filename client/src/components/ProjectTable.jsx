@@ -1,3 +1,4 @@
+import {useState, useEffect} from 'react';
 import React from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col';
@@ -5,7 +6,11 @@ import Table from 'react-bootstrap/Table';
 import TableRow from './TableRow';
 
 const ProjectTable = () => {
+  const [tableData, setTableData] = useState(null)
 
+  useEffect(()=>{
+    fetch('/timesheet')
+  },[])
   return (
         <>
       <Row className='mb-3'>

@@ -6,8 +6,6 @@ import Collapse from 'react-bootstrap/Collapse';
 import Button from 'react-bootstrap/Button';
 
 const CsvForm = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [CsvFile, setCsvFile] = useState()
   const [openForm, setOpenForm] = useState(false)
   return (
       <Container className='py-2 my-4 border border-3 rounded w-50'>

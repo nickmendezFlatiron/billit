@@ -4,10 +4,9 @@ require_relative '../app/models/timesheet'
 
 # Change path according to desired the csv path
 # Make sure to call the method at the end of the file
-path = "/Users/nickmendez/Development/code/side-projects/giant-machines/billit/client/src/assets/GM_Coding_Exercise_Sample_Data_-_GM_Coding_Exercise_Sample_Data.csv"
+path = "client/src/assets/GM_Coding_Exercise_Sample_Data_-_GM_Coding_Exercise_Sample_Data.csv"
 
 def import path
-  # (:billing_date, :client, :project, :project_code, :hours, :is_billable, :first_name, :last_name, :billable_rate)
     csv_file = File.read(path)
     csv = CSV.parse(csv_file, headers: true)
     csv.each do |row|
