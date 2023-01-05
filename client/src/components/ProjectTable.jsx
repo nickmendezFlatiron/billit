@@ -2,23 +2,20 @@ import React from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
-import Container from 'react-bootstrap/Container'
 import TableRow from './TableRow';
 
 const ProjectTable = () => {
 
   return (
-      <Container fluid className=''>
-      <Row>
+        <>
+      <Row className='mb-3'>
         <Col>
           <h5>Hours Tracked</h5>
           <h2>xxx.00</h2>
         </Col>
-        <Col className="text-end">
-          <Col className='border w-auto'>
-            <h5 className=''>Billable Amount</h5>
+        <Col className="text-end ">
+            <h5 >Billable Amount</h5>
             <h2>$xx,xxx.00</h2>
-          </Col>
         </Col>
       </Row>
   
@@ -36,7 +33,7 @@ const ProjectTable = () => {
           <TableRow></TableRow>
         </tbody>
       </Table>
-      </Container>
+        </>
   )
 }
 
