@@ -20,3 +20,16 @@
   border-width: 2px;
   transition: linear .2s ease;
 }
+
+.table-header th{
+  padding: 5px ;
+  border-width: 1px;
+  border-color: #c5c5c5;
+  border-style: solid !important;
+  font-weight: normal;
+  
+}
+
+.table-header{
+  background-image: linear-gradient(white, #e0e0e0 80%);
+}
