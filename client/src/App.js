@@ -1,27 +1,26 @@
-import {useState, useEffect} from 'react';
-import NavigationBar from './components/NavigationBar';
-import CsvForm from './components/CsvForm';
-import ProjectTable from './components/ProjectTable';
-import Container from 'react-bootstrap/Container';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles/App.css';
+import { useState, useEffect } from "react";
+import NavigationBar from "./components/NavigationBar";
+import TimesheetForm from "./components/TimesheetForm";
+import ProjectTable from "./components/ProjectTable";
+import Container from "react-bootstrap/Container";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./styles/App.css";
 
 function App() {
-  const [tableData, setTableData] = useState(null)
+  const [tableData, setTableData] = useState(null);
 
-  useEffect(()=>{
-    fetch('/timesheets')
-      .then(res => res.json())
-      .then(data => setTableData(data))
+  useEffect(() => {
+    fetch("/timesheets")
+      .then((res) => res.json())
+      .then((data) => setTableData(data));
+  }, []);
 
-  },[])
-  
   return (
     <div className="App">
       <NavigationBar />
       <Container>
-        <CsvForm />
-        <ProjectTable tableData={tableData}/>
+        <TimesheetForm />
+        <ProjectTable tableData={tableData} />
       </Container>
     </div>
   );
