@@ -41,7 +41,9 @@ const ProjectTable = ({ tableData }) => {
             <th className="text-end pe-2">Billable Amount</th>
           </tr>
         </thead>
-        <tbody>{placeHolder}</tbody>
+        <tbody>
+          {renderTableRows}
+          </tbody>
       </Table>
     </>
   );
