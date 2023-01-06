@@ -1,4 +1,5 @@
 import React from 'react'
+import Spinner from 'react-bootstrap/Spinner'
 
 const TableRow = ({project, name}) => { 
   const totalHours = project?.reduce((a,b )=> {return a + b.hours}, 0)
@@ -30,7 +31,7 @@ const TableRow = ({project, name}) => {
       currency: "USD"
     }).format(amount);
   }
-  console.log(billableAmount)
+  if (name === "placeholder" ) return <Spinner animation="border" className="text-blue mt-3"/>
   return (
     <tr>
           <td className='ps-2 text-blue fw-light'>{name}</td>

@@ -6,15 +6,8 @@ import Table from 'react-bootstrap/Table';
 import TableRow from './TableRow';
 import uuid from 'react-uuid';
 
-const ProjectTable = () => {
-  const [tableData, setTableData] = useState(null)
-
-  useEffect(()=>{
-    fetch('/timesheets')
-      .then(res => res.json())
-      .then(data => setTableData(data))
-
-  },[])
+const ProjectTable = ({tableData}) => {
+ 
 
   const sortByName = tableData?.reduce((acc,b,i)=> {
     acc[b.project] ? acc[b.project].push(b) : acc[b.project] = [b]
@@ -22,12 +15,12 @@ const ProjectTable = () => {
   },{})
   
   const renderTableRows = sortByName && Object.keys(sortByName).map(name => {
-    
     return <TableRow key={uuid()} name={name} project={sortByName[name]} />
   })
-  
+  const tempRow = <TableRow name="placeholder"/>
+  const placeHolder = tableData === null ? tempRow : renderTableRows;
   return (
-        <>
+    <>
       <Row className='mb-3'>
         <Col>
           <h5>Hours Tracked</h5>
@@ -50,10 +43,10 @@ const ProjectTable = () => {
           </tr>
         </thead>
         <tbody>
-          {renderTableRows}
+          {placeHolder}
         </tbody>
       </Table>
-        </>
+    </>
   )
 }
 
