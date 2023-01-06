@@ -52,3 +52,13 @@ tbody tr {
   width: auto !important;;
   border-radius: 100%;
 }
+
+.rotate180{
+  transform: rotate(180deg);
+  transition: all 0.5s ease;
+}
+
+.rotate-180 {
+  transform: rotate(0deg);
+  transition: all 0.3s ease;
+}

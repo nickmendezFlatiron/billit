@@ -1,9 +1,6 @@
 require 'csv'
 require 'byebug'
 
-
-# Change path according to desired the csv path
-# Make sure to call the method at the end of the file
 path = "db/GM_Coding_Exercise_Sample_Data_-_GM_Coding_Exercise_Sample_Data.csv"
 
 puts "seeding csv file..."
@@ -35,7 +32,7 @@ csv.each do |row|
     last_name: last_name, 
     billable_rate:billable_rate
   )
-  puts timesheet 
+  
 end
   
 

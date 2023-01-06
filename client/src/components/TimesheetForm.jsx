@@ -6,11 +6,13 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Collapse from "react-bootstrap/Collapse";
 import Button from "react-bootstrap/Button";
+import uuid from 'react-uuid'
+import formValidate from "../functions/formValidate"
 
 const TimesheetForm = () => {
   const formInit = {
     billing_date: "",
-    is_billable: "--",
+    is_billable: true,
     hours: 0,
     billable_rate: 0,
     client: "",
@@ -21,17 +23,13 @@ const TimesheetForm = () => {
   };
   const [formInfo, setFormInfo] = useState(formInit);
   const [openForm, setOpenForm] = useState(false);
+  const [errors, setErrors] = useState(null)
+  
 
   const openClose = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="28"
-      height="28"
-      fill="currentColor"
-      className="fw-bold"
-      viewBox="0 0 16 16"
-    >
-      <path d="m1.854 14.854 13-13a.5.5 0 0 0-.708-.708l-13 13a.5.5 0 0 0 .708.708ZM4 1a.5.5 0 0 1 .5.5v2h2a.5.5 0 0 1 0 1h-2v2a.5.5 0 0 1-1 0v-2h-2a.5.5 0 0 1 0-1h2v-2A.5.5 0 0 1 4 1Zm5 11a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5A.5.5 0 0 1 9 12Z" />
+    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16">
+      <path fillRule="evenodd" d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z"/>
+      <path fillRule="evenodd" d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
     </svg>
   );
 
@@ -43,27 +41,36 @@ const TimesheetForm = () => {
   }
 
   function handleSubmitForm(e) {
-    e.preventDefault();
-    console.log("submitted", formInfo);
+    e.preventDefault();  
+    console.log(formValidate(formInfo))
+    setErrors([...formValidate(formInfo)])
+    
   }
 
   function handleResetForm(e) {
     setFormInfo(formInit);
+    setErrors([])
   }
+
+  const renderErrors = errors?.map(error => {
+    
+   return  <Col key={uuid()}>{error}</Col>
+  })
   return (
     <div className="py-3 mt-2">
       <div className="d-flex pb-3">
         <h2 className="text-center">Add Entry</h2>
         <Button
-          className="rounded-pill ms-4"
+          className={`opacity-75 rounded-pill border border-3  border-primary ms-4 ${openForm === false ? "rotate-180" : "rotate180" }`}
           size="sm"
+          variant="outline-primary"
           onClick={() => setOpenForm(!openForm)}
         >
           {openClose}
         </Button>
       </div>
       <Collapse in={openForm}>
-        <Form className="bg-white" onSubmit={handleSubmitForm}>
+        <Form className="" onSubmit={handleSubmitForm}>
           <Row className="my-3">
             <Col>
               <Form.Label>Date *</Form.Label>
@@ -75,6 +82,7 @@ const TimesheetForm = () => {
                 onChange={handleChangeForm}
                 required
               />
+              
             </Col>
             <Col>
               <Form.Group>
@@ -85,7 +93,6 @@ const TimesheetForm = () => {
                   onChange={handleChangeForm}
                   required
                 >
-                  <option value={null}>--</option>
                   <option value={true}>Yes</option>
                   <option value={false}>No</option>
                 </Form.Select>
@@ -194,6 +201,9 @@ const TimesheetForm = () => {
                 </Button>
               </div>
             </Col>
+          </Row>
+          <Row>
+            {renderErrors}
           </Row>
         </Form>
       </Collapse>
