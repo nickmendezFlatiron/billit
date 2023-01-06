@@ -1,6 +1,6 @@
 require 'csv'
 require 'byebug'
-require_relative '../app/models/timesheet'
+require 'date'
 
 # Change path according to desired the csv path
 # Make sure to call the method at the end of the file
@@ -10,7 +10,9 @@ def import path
     csv_file = File.read(path)
     csv = CSV.parse(csv_file, headers: true)
     csv.each do |row|
-      billing_date = row["billing_date"]
+      split = row["billing_date"].split("/")
+
+      billing_date = Date.new((split[2].to_i + 2000), split[0].to_i, split[1].to_i).to_s
       client = row["client"]
       project = row["project"]
       project_code = row["project_code"]
@@ -20,7 +22,7 @@ def import path
       last_name = row["last_name"]
       billable_rate = row["billable_rate"].to_f
 
-      timesheet = Timesheet.create!(
+       timesheet = Timesheet.create!(
         billing_date: billing_date, 
         client: client, 
         project: project, 
@@ -31,9 +33,9 @@ def import path
         last_name: last_name, 
         billable_rate:billable_rate
       )
-      puts timesheet
+      puts timesheet 
     end
   
 end
 
-# import( path)
+import(path)

@@ -38,3 +38,7 @@ tbody tr {
 .table-header{
   background-image: linear-gradient(white, #e0e0e0 80%);
 }
+
+.text-blue{
+  color: #2d5b8e;
+}

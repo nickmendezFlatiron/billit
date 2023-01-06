@@ -4,13 +4,28 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
 import TableRow from './TableRow';
+import uuid from 'react-uuid';
 
 const ProjectTable = () => {
   const [tableData, setTableData] = useState(null)
 
   useEffect(()=>{
-    fetch('/timesheet')
+    fetch('/timesheets')
+      .then(res => res.json())
+      .then(data => setTableData(data))
+
   },[])
+
+  const sortByName = tableData?.reduce((acc,b,i)=> {
+    acc[b.project] ? acc[b.project].push(b) : acc[b.project] = [b]
+    return acc;
+  },{})
+  
+  const renderTableRows = sortByName && Object.keys(sortByName).map(name => {
+    
+    return <TableRow key={uuid()} name={name} project={sortByName[name]} />
+  })
+  
   return (
         <>
       <Row className='mb-3'>
@@ -35,7 +50,7 @@ const ProjectTable = () => {
           </tr>
         </thead>
         <tbody>
-          <TableRow></TableRow>
+          {renderTableRows}
         </tbody>
       </Table>
         </>
