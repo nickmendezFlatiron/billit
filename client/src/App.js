@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/App.css";
 
 function App() {
-  const [tableData, setTableData] = useState(null);
+  const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
     fetch("/timesheets")

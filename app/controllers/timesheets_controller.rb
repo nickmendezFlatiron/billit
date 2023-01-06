@@ -2,7 +2,7 @@ class TimesheetsController < ApplicationController
 
   def index
     timesheets = Timesheet.all
-    render json: timesheets, status: :ok
+    render json: timesheets.order(project: :asc), status: :ok
   end
 
   def create
@@ -16,7 +16,4 @@ class TimesheetsController < ApplicationController
     params.permit(:billing_date, :client, :project, :project_code, :hours, :is_billable, :first_name, :last_name, :billable_rate)
   end
 
-  def import 
-    
-  end 
 end
