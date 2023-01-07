@@ -4,7 +4,7 @@ class Timesheet < ApplicationRecord
   validates :is_billable, inclusion: [true, false]
   validates :hours, presence: true , numericality: {greater_than_or_equal_to: 0}
   validates :billable_rate, presence: true , numericality: {greater_than_or_equal_to: 0}
-  validates :first_name, presence: true, format: {with: /[a-zA-z]/ , message: "Enter only the first name using letters."} 
-  validates :last_name, presence: true , format: {with: /[a-zA-z]/ , message: "Enter only the last name using letters."} 
+  validates :first_name, presence: true, format: {with: /\A[a-zA-Z]+\z/ , message: "must be a single name of letters."} 
+  validates :last_name, presence: true , format: {with: /\A[a-zA-Z]+\z/, message: "must be a single name of letters."} 
 
 end

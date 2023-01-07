@@ -5,10 +5,8 @@ class TimesheetsController < ApplicationController
     render json: timesheets.order(project: :asc), status: :ok
   end
 
-  def create
-    byebug
+  def create  
     timesheet_entry = Timesheet.create!(timesheet_params)
-
     render json: timesheet_entry, status: :created
   end
 

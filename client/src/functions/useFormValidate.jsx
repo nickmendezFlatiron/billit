@@ -1,5 +1,5 @@
-const useFormValidate = (formData, setErrors) => {
-  setErrors([])
+const useFormValidate = (formData, setMessages) => {
+  setMessages([])
   const {billing_date, is_billable, hours, billable_rate} = formData
   const errors = []
   if(billing_date.length < 0) {
@@ -18,7 +18,7 @@ const useFormValidate = (formData, setErrors) => {
       errors.push(`${name} is required.`)
     }
   })
-  return errors.length === 0 ? true : setErrors([...errors]);
+  return errors.length === 0 ? true : setMessages([...errors]);
 }
 
 export default useFormValidate

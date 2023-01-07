@@ -10,7 +10,7 @@ import uuid from 'react-uuid'
 import useFormValidate from "../functions/useFormValidate"
 import fetchPostEntry from "../functions/fetchPostEntry";
 
-const TimesheetForm = ({setTableData}) => {
+const TimesheetForm = ({tableData, setTableData}) => {
   const formInit = {
     billing_date: "",
     is_billable: true,
@@ -24,7 +24,7 @@ const TimesheetForm = ({setTableData}) => {
   };
   const [formInfo, setFormInfo] = useState(formInit);
   const [openForm, setOpenForm] = useState(false);
-  const [errors, setErrors] = useState(null)
+  const [messages, setMessages] = useState(null)
   const validate = useFormValidate
   
 
@@ -52,18 +52,24 @@ const TimesheetForm = ({setTableData}) => {
 
   function handleSubmitForm(e) {
     e.preventDefault();  
-   const res = validate(formInfo, setErrors)
+   const res = validate(formInfo, setMessages)
     if(res){
-      fetchPostEntry(formInfo)
+      const fetch = fetchPostEntry(formInfo, setMessages)
+      if(fetch) {
+        fetch.then(data => {
+          setTableData([...tableData, data])}
+          )
+        
+      }
     }
   }
 
   function handleResetForm(e) {
     setFormInfo(formInit);
-    setErrors([])
+    setMessages([])
   }
 
-  const renderErrors = errors?.map(error =><li className="text-danger" key={uuid()}>{error}</li>)
+  const renderMessages = messages?.map(error =><li className="text-danger" key={uuid()}>{error}</li>)
   return (
     <div className="py-3 mt-2">
       <div className="d-flex pb-3">
@@ -217,7 +223,7 @@ const TimesheetForm = ({setTableData}) => {
             </Col>
           </Row>
           <Row>
-            {renderErrors}
+            {renderMessages}
           </Row>
         </Form>
       </Collapse>
