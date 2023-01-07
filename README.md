@@ -43,12 +43,19 @@
   - run terminal command: `bundle install`
     - this will install the ruby gem dependencies for the application
 
-3. **Navigate to the client folder**
+3. **Create The Database**  
+  - after the gem dependencies have been installed run the following commands in the terminal:
+  - `rails db:create`
+  - `rails db:migrate`
+  - `rails db:seed`
+  - Your database should be created and the data within the provided csv file will be persisted in the database
+  
+4. **Navigate to the client folder**
   - run terminal command: `cd client/`
   - then run terminal command: `npm install`
     - this will install the frontend dependencies for the application
 
-4. **Run application on localhost**
+5. **Run application on localhost**
   - open a second command terminal and navigate to the root directory of the repository
   - then run terminal command: `rails s`
     - this will start the backend server on localhost:3000
@@ -58,5 +65,5 @@
     - within the client folder, run terminal command: `npm start`
       - this will run the client (frontend) on localhost:4000
 
-5. **The application should be successfully started at this point.**
+6. **The application should be successfully started at this point.**
 
