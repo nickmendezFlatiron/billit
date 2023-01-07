@@ -49,6 +49,7 @@
   - `rails db:migrate`
   - `rails db:seed`
   - Your database should be created and the data within the provided csv file will be persisted in the database
+    - Note: The provided csv file is already included within the db/ folder
 
 4. **Navigate to the client folder**
   - run terminal command: `cd client/`

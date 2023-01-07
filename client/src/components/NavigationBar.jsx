@@ -1,8 +1,8 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
-
 import logo from "../assets/billit-logo.png";
+
 const NavigationBar = () => {
   return (
     <Navbar bg="dark" variant="dark">
