@@ -18,8 +18,8 @@ function App() {
   return (
     <div className="App">
       <NavigationBar />
-      <Container>
-        <TimesheetForm tableData={tableData} setTableData={setTableData}/>
+      <Container fluid="md">
+        <TimesheetForm tableData={tableData} setTableData={setTableData} />
         <ProjectTable tableData={tableData} />
       </Container>
     </div>

@@ -1,19 +1,20 @@
 const fetchPostEntry = async (formInfo, setMessages) => {
-  const postReq = await fetch('/timesheets',{
-    method: 'POST',
+  const postReq = await fetch("/timesheets", {
+    method: "POST",
     body: JSON.stringify(formInfo),
     headers: {
-      "Content-Type": "application/json"
-    }
-  })
-  const data = await postReq.json()
-  if(!postReq.ok) {
-    setMessages(data[0])
-    return false
-  } else {
-    setMessages(["Upload Successful!"])
-    return data
-  }
-}
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await postReq.json();
 
-export default fetchPostEntry
+  if (!postReq.ok) {
+    setMessages(data[0]);
+    return false;
+  } else {
+    setMessages(["Upload Successful!"]);
+    return data;
+  }
+};
+
+export default fetchPostEntry;

@@ -1,5 +1,4 @@
 import React from "react";
-import Spinner from "react-bootstrap/Spinner";
 
 const TableRow = ({ project, name }) => {
   const totalHours = project?.reduce((a, b) => {
@@ -21,13 +20,13 @@ const TableRow = ({ project, name }) => {
   }, 0);
 
   const stats = {
-    totalHours: totalHours && roundAmount(totalHours),
-    billableHours: billableHours && roundAmount(billableHours),
-    billableAmount: billableAmount && roundAmount(billableAmount),
+    totalHours: roundAmount(totalHours),
+    billableHours: roundAmount(billableHours),
+    billableAmount: roundAmount(billableAmount),
   };
 
   function roundAmount(amount) {
-    return Math.round(amount * 100) / 100;
+    return (Math.round(amount * 100) / 100).toFixed(2);
   }
   function formatMoney(amount) {
     return new Intl.NumberFormat("en-US", {
@@ -35,16 +34,14 @@ const TableRow = ({ project, name }) => {
       currency: "USD",
     }).format(amount);
   }
-  if (name === "placeholder")
-    return <Spinner animation="border" className="text-blue mt-3" />;
 
   return (
     <tr>
       <td className="ps-2 text-blue fw-light">{name}</td>
       <td className="text-blue fw-light">{project[0].client}</td>
-      <td className="text-end text-blue fw-light">{stats?.totalHours}</td>
+      <td className="text-end text-blue fw-light">{stats.totalHours}</td>
       <td className="text-end fw-light">
-        {stats?.billableHours}
+        {stats.billableHours}
         <span className="text-muted ms-1">
           ({Math.round((stats.billableHours / stats.totalHours) * 100)}%)
         </span>

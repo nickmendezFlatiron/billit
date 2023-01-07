@@ -6,11 +6,12 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Collapse from "react-bootstrap/Collapse";
 import Button from "react-bootstrap/Button";
-import uuid from 'react-uuid'
-import useFormValidate from "../functions/useFormValidate"
+import uuid from "react-uuid";
+import useFormValidate from "../functions/useFormValidate";
 import fetchPostEntry from "../functions/fetchPostEntry";
+import chevron from "../assets/double-chevron.svg";
 
-const TimesheetForm = ({tableData, setTableData}) => {
+const TimesheetForm = ({ tableData, setTableData }) => {
   const formInit = {
     billing_date: "",
     is_billable: true,
@@ -24,16 +25,8 @@ const TimesheetForm = ({tableData, setTableData}) => {
   };
   const [formInfo, setFormInfo] = useState(formInit);
   const [openForm, setOpenForm] = useState(false);
-  const [messages, setMessages] = useState(null)
-  const validate = useFormValidate
-  
-
-  const openClose = (
-    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16">
-      <path fillRule="evenodd" d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z"/>
-      <path fillRule="evenodd" d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
-    </svg>
-  );
+  const [messages, setMessages] = useState(null);
+  const validate = useFormValidate;
 
   function handleChangeForm(e) {
     setFormInfo({
@@ -41,51 +34,66 @@ const TimesheetForm = ({tableData, setTableData}) => {
       [e.target.name]: e.target.value,
     });
 
-    if(e.target.name === "is_billable" && e.target.value === "false" ) {
+    if (e.target.name === "is_billable" && e.target.value === "false") {
       setFormInfo({
         ...formInfo,
         [e.target.name]: e.target.value,
-        billable_rate: 0
+        billable_rate: 0,
       });
     }
   }
 
   function handleSubmitForm(e) {
-    e.preventDefault();  
-   const res = validate(formInfo, setMessages)
-    if(res){
-      const fetch = fetchPostEntry(formInfo, setMessages)
-      if(fetch) {
-        fetch.then(data => {
-          setTableData([...tableData, data])}
-          )
-        
-      }
+    e.preventDefault();
+    const res = validate(formInfo, setMessages);
+    if (res) {
+      const fetch = fetchPostEntry(formInfo, setMessages);
+      fetch.then((data) => {
+        if (data) {
+          setTableData([...tableData, data]);
+          setFormInfo(formInit);
+        }
+      });
     }
+  }
+
+  function handleFormOpen() {
+    setOpenForm(!openForm);
+    setMessages([]);
   }
 
   function handleResetForm(e) {
     setFormInfo(formInit);
-    setMessages([])
+    setMessages([]);
   }
 
-  const renderMessages = messages?.map(error =><li className="text-danger" key={uuid()}>{error}</li>)
+  const renderMessages = messages?.map((message) => (
+    <li className="text-danger" key={uuid()}>
+      {message}
+    </li>
+  ));
   return (
     <div className="py-3 mt-2">
       <div className="d-flex pb-3">
         <h2 className="text-center">Add Entry</h2>
         <Button
-          className={`opacity-75 rounded-pill border border-3  border-primary ms-4 ${openForm === false ? "rotate-180" : "rotate180" }`}
+          className={`opacity-75 rounded-circle border border-3  border-primary ms-4 ${
+            openForm === false ? "rotate-180" : "rotate180"
+          }`}
           size="sm"
           variant="outline-primary"
-          onClick={() => setOpenForm(!openForm)}
+          onClick={handleFormOpen}
         >
-          {openClose}
+          <img
+            className="text-primary"
+            src={chevron}
+            alt="open and close button"
+          />
         </Button>
       </div>
       <Collapse in={openForm}>
         <Form className="" onSubmit={handleSubmitForm}>
-          <Row className="my-3">
+          <Row xs={2} sm={4} className="my-3">
             <Col>
               <Form.Label>Date *</Form.Label>
               <Form.Control
@@ -96,11 +104,10 @@ const TimesheetForm = ({tableData, setTableData}) => {
                 onChange={handleChangeForm}
                 required
               />
-              
             </Col>
             <Col>
               <Form.Group>
-                <Form.Label>Is this billable? *</Form.Label>
+                <Form.Label>Entry billable? *</Form.Label>
                 <Form.Select
                   name="is_billable"
                   value={formInfo.is_billable}
@@ -114,7 +121,7 @@ const TimesheetForm = ({tableData, setTableData}) => {
             </Col>
             <Col>
               <Form.Group>
-                <Form.Label>Hours *</Form.Label>
+                <Form.Label className="mt-2 mt-sm-0">Hours *</Form.Label>
                 <Form.Control
                   value={formInfo.hours}
                   name="hours"
@@ -127,7 +134,7 @@ const TimesheetForm = ({tableData, setTableData}) => {
               </Form.Group>
             </Col>
             <Col>
-              <Form.Label>Billable Rate *</Form.Label>
+              <Form.Label className="mt-2 mt-sm-0">Billable Rate *</Form.Label>
               <InputGroup className="-3">
                 <InputGroup.Text>$</InputGroup.Text>
                 <Form.Control
@@ -138,6 +145,7 @@ const TimesheetForm = ({tableData, setTableData}) => {
                   name="billable_rate"
                   value={formInfo.billable_rate}
                   onChange={handleChangeForm}
+                  disabled={formInfo.is_billable === "false"}
                   required
                 />
               </InputGroup>
@@ -209,7 +217,7 @@ const TimesheetForm = ({tableData, setTableData}) => {
             <Col>
               <Form.Label></Form.Label>
               <div className="d-flex pt-2 justify-content-end">
-                <Button className="me-4" type="submit">
+                <Button className="me-3 me-sm-4" type="submit">
                   Submit
                 </Button>
                 <Button
@@ -222,12 +230,10 @@ const TimesheetForm = ({tableData, setTableData}) => {
               </div>
             </Col>
           </Row>
-          <Row>
-            {renderMessages}
-          </Row>
+          <Row>{renderMessages}</Row>
         </Form>
       </Collapse>
-      <hr className="" />
+      <hr />
     </div>
   );
 };
