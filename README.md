@@ -1,5 +1,5 @@
 # README
-## Nicholas Mendez | Take Home Coding Challenge
+## Nicholas Mendez | Take Home Coding Challenge For Giant Machines
 ## Video Walkthrough Link
 - [CLICK HERE FOR A VIDEO WALKTHROUGH OF THE APP](https://youtu.be/6xQxcri6YoM)
 
@@ -49,7 +49,7 @@
   - `rails db:migrate`
   - `rails db:seed`
   - Your database should be created and the data within the provided csv file will be persisted in the database
-  
+
 4. **Navigate to the client folder**
   - run terminal command: `cd client/`
   - then run terminal command: `npm install`
