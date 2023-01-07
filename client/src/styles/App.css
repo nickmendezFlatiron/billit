@@ -1,25 +1,9 @@
-/* .underline-text-input {
-  border-color: #a4a4a4;
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
-  border-bottom-style: groove;
-  border-radius: 0;
-  border-width: 2px;
+.navigation{
+  font-size: 30px !important;
+  align-self: baseline;
+  display: inline-block;
+  
 }
-.underline-text-input:focus {
-  outline: none;
-  box-shadow: none;
-  border-color: #fbc724;
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
-  border-bottom-style: groove;
-  border-radius: 0;
-  border-width: 2px;
-  transition: linear 0.2s ease;
-} */
-
 .table-header th {
   color: rgb(61, 61, 61);
 
