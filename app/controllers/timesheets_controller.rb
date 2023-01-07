@@ -6,7 +6,9 @@ class TimesheetsController < ApplicationController
   end
 
   def create
-    timesheet_entry = Timesheet.create(timesheet_params)
+    byebug
+    timesheet_entry = Timesheet.create!(timesheet_params)
+
     render json: timesheet_entry, status: :created
   end
 

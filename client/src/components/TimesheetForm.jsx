@@ -7,9 +7,10 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Collapse from "react-bootstrap/Collapse";
 import Button from "react-bootstrap/Button";
 import uuid from 'react-uuid'
-import formValidate from "../functions/formValidate"
+import useFormValidate from "../functions/useFormValidate"
+import fetchPostEntry from "../functions/fetchPostEntry";
 
-const TimesheetForm = () => {
+const TimesheetForm = ({setTableData}) => {
   const formInit = {
     billing_date: "",
     is_billable: true,
@@ -24,6 +25,7 @@ const TimesheetForm = () => {
   const [formInfo, setFormInfo] = useState(formInit);
   const [openForm, setOpenForm] = useState(false);
   const [errors, setErrors] = useState(null)
+  const validate = useFormValidate
   
 
   const openClose = (
@@ -38,13 +40,22 @@ const TimesheetForm = () => {
       ...formInfo,
       [e.target.name]: e.target.value,
     });
+
+    if(e.target.name === "is_billable" && e.target.value === "false" ) {
+      setFormInfo({
+        ...formInfo,
+        [e.target.name]: e.target.value,
+        billable_rate: 0
+      });
+    }
   }
 
   function handleSubmitForm(e) {
     e.preventDefault();  
-    console.log(formValidate(formInfo))
-    setErrors([...formValidate(formInfo)])
-    
+   const res = validate(formInfo, setErrors)
+    if(res){
+      fetchPostEntry(formInfo)
+    }
   }
 
   function handleResetForm(e) {
@@ -52,10 +63,7 @@ const TimesheetForm = () => {
     setErrors([])
   }
 
-  const renderErrors = errors?.map(error => {
-    
-   return  <Col key={uuid()}>{error}</Col>
-  })
+  const renderErrors = errors?.map(error =><li className="text-danger" key={uuid()}>{error}</li>)
   return (
     <div className="py-3 mt-2">
       <div className="d-flex pb-3">
@@ -124,6 +132,7 @@ const TimesheetForm = () => {
                   name="billable_rate"
                   value={formInfo.billable_rate}
                   onChange={handleChangeForm}
+                  required
                 />
               </InputGroup>
             </Col>
@@ -138,6 +147,7 @@ const TimesheetForm = () => {
                 name="client"
                 value={formInfo.client}
                 onChange={handleChangeForm}
+                required
               />
             </Col>
             <Col>
@@ -149,6 +159,7 @@ const TimesheetForm = () => {
                 name="project"
                 value={formInfo.project}
                 onChange={handleChangeForm}
+                required
               />
             </Col>
             <Col>
@@ -160,6 +171,7 @@ const TimesheetForm = () => {
                 name="project_code"
                 value={formInfo.project_code}
                 onChange={handleChangeForm}
+                required
               />
             </Col>
           </Row>
@@ -173,6 +185,7 @@ const TimesheetForm = () => {
                 name="first_name"
                 value={formInfo.first_name}
                 onChange={handleChangeForm}
+                required
               />
             </Col>
             <Col>
@@ -184,6 +197,7 @@ const TimesheetForm = () => {
                 name="last_name"
                 value={formInfo.last_name}
                 onChange={handleChangeForm}
+                required
               />
             </Col>
             <Col>
