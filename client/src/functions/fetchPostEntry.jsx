@@ -9,7 +9,8 @@ const fetchPostEntry = async (formInfo, setMessages) => {
   const data = await postReq.json();
 
   if (!postReq.ok) {
-    setMessages(data[0]);
+    console.log(data)
+    setMessages(data);
     return false;
   } else {
     setMessages(["Upload Successful!"]);

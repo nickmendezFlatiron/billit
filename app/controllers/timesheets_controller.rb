@@ -6,8 +6,12 @@ class TimesheetsController < ApplicationController
   end
 
   def create  
-    timesheet_entry = Timesheet.create!(timesheet_params)
-    render json: timesheet_entry, status: :created
+    if Timesheet.find_by(timesheet_params)
+      render json: ["Duplicate entry found in the database."] , status: :unprocessable_entity
+    else
+      timesheet_entry = Timesheet.create!(timesheet_params)
+      render json: timesheet_entry, status: :created
+    end
   end
 
   private
