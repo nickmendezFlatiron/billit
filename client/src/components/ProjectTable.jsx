@@ -46,11 +46,11 @@ const ProjectTable = ({ tableData }) => {
         <Table hover className="mw-100">
           <thead>
             <tr className="table-header">
-              <th className="ps-2">Name</th>
-              <th>Clients</th>
-              <th className="text-end">Hours</th>
-              <th className="text-end">Billable Hours</th>
-              <th className="text-end pe-2">Billable Amount</th>
+              <th className="ps-2 align-middle">Name</th>
+              <th className="align-middle">Clients</th>
+              <th className="text-end align-middle">Hours</th>
+              <th className="text-end align-middle">Billable Hours</th>
+              <th className="text-end pe-2  align-middle">Billable Amount</th>
             </tr>
           </thead>
           <tbody>{renderTableRows}</tbody>
