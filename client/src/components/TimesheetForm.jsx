@@ -98,7 +98,6 @@ const TimesheetForm = ({ tableData, setTableData }) => {
               <Form.Label>Date *</Form.Label>
               <Form.Control
                 type="date"
-                className="underline-text-input"
                 name="billing_date"
                 value={formInfo.billing_date}
                 onChange={handleChangeForm}
@@ -157,7 +156,6 @@ const TimesheetForm = ({ tableData, setTableData }) => {
               <Form.Control
                 type="text"
                 placeholder="Client..."
-                className="underline-text-input"
                 name="client"
                 value={formInfo.client}
                 onChange={handleChangeForm}
@@ -169,7 +167,6 @@ const TimesheetForm = ({ tableData, setTableData }) => {
               <Form.Control
                 type="text"
                 placeholder="Project name..."
-                className="underline-text-input "
                 name="project"
                 value={formInfo.project}
                 onChange={handleChangeForm}
@@ -181,7 +178,6 @@ const TimesheetForm = ({ tableData, setTableData }) => {
               <Form.Control
                 type="text"
                 placeholder="Project code..."
-                className="underline-text-input"
                 name="project_code"
                 value={formInfo.project_code}
                 onChange={handleChangeForm}
@@ -195,7 +191,6 @@ const TimesheetForm = ({ tableData, setTableData }) => {
               <Form.Control
                 type="text"
                 placeholder="First name..."
-                className="underline-text-input "
                 name="first_name"
                 value={formInfo.first_name}
                 onChange={handleChangeForm}
@@ -207,7 +202,6 @@ const TimesheetForm = ({ tableData, setTableData }) => {
               <Form.Control
                 type="text"
                 placeholder="Last name..."
-                className="underline-text-input "
                 name="last_name"
                 value={formInfo.last_name}
                 onChange={handleChangeForm}

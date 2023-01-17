@@ -1,18 +1,18 @@
 import React from "react";
 
 const TableRow = ({ project, name }) => {
-  const totalHours = project?.reduce((a, b) => {
+  const totalHours = project.reduce((a, b) => {
     return a + b.hours;
   }, 0);
 
-  const billableHours = project?.reduce((a, b) => {
+  const billableHours = project.reduce((a, b) => {
     if (b.is_billable) {
       return a + b.hours;
     }
     return a;
   }, 0);
 
-  const billableAmount = project?.reduce((a, b) => {
+  const billableAmount = project.reduce((a, b) => {
     if (b.is_billable) {
       return a + b.hours * b.billable_rate;
     }
@@ -28,6 +28,7 @@ const TableRow = ({ project, name }) => {
   function roundAmount(amount) {
     return (Math.round(amount * 100) / 100).toFixed(2);
   }
+  
   function formatMoney(amount) {
     return new Intl.NumberFormat("en-US", {
       style: "currency",

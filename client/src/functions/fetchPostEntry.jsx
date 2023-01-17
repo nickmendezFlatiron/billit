@@ -9,7 +9,6 @@ const fetchPostEntry = async (formInfo, setMessages) => {
   const data = await postReq.json();
 
   if (!postReq.ok) {
-    console.log(data)
     setMessages(data);
     return false;
   } else {

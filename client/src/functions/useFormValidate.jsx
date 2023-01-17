@@ -1,10 +1,7 @@
 const useFormValidate = (formData, setMessages) => {
   setMessages([]);
-  const { billing_date, is_billable, hours, billable_rate } = formData;
-  const errors = [];
-  if (billing_date.length < 0) {
-    errors.push("Billing date is required.");
-  }
+  const { is_billable, hours, billable_rate } = formData;
+  const errors = []
   if (
     (is_billable === true && parseFloat(billable_rate) === 0) ||
     (is_billable === "true" && parseFloat(billable_rate) === 0)
